@@ -69,6 +69,16 @@ def validate_sz_dz_zone(i_df):
                 df[fieldProx][curIdx] = df['Prox'][zoneIdxInDf]
                 df[fieldDist][curIdx] = df['Dist'][zoneIdxInDf]
             curIdx = curIdx + 1
+            res = (np.abs(zoneIdxArray[0] - curIdx)).argmin()
+            if (res < curIdx):
+                zoneIdx = res + 1
+                if (zoneIdx < len(zoneIdxArray[0])):
+                    zoneIdxInDf = zoneIdxArray[0][res + 1]
+                else:
+                    noMoreZone = True
+            else:
+                zoneIdx = res
+                zoneIdxInDf = zoneIdxArray[0][res]
             if ((curIdx == zoneIdxInDf) and ((zoneIdx + 1) < (len(zoneIdxArray[0])))):
                 zoneIdx = zoneIdx + 1
                 if (calc == 'SZ'):
